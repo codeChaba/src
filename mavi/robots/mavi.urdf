@@ -1,0 +1,324 @@
+<?xml version="1.0" ?>
+<robot name="mavi">
+  <joint name="mavi__Base_fix" type="fixed">
+    <parent link="mavi__base"/>
+    <child link="mavi__stand"/>
+    <origin rpy="0  0  0" xyz="-0.396  0    -0.25"/>
+    <axis xyz="0  0  0"/>
+    <limit effort="0" lower="0" upper="0" velocity="0"/>
+  </joint>
+ 
+   <joint name="mavi__arm_height" type="prismatic">
+    <parent link="mavi__stand"/>
+    <child link="mavi__arm_base"/>
+    <origin rpy="0  0  0" xyz="0.00054  0       0.36666"/>
+    <axis xyz="0  0  1"/>
+    <limit effort="-1.0" lower="-0.7" upper="0.0" velocity="-1.0"/>
+  </joint> 
+
+  <joint name="mavi__arm_fixed" type="fixed">
+    <parent link="mavi__arm_base"/>
+    <child link="mavi__arm_part1"/>
+    <origin rpy="0  0  0" xyz="0.065  0     0"/>
+    <axis xyz="0  0  0"/>
+    <limit effort="0" lower="0" upper="0" velocity="0"/>
+  </joint>
+  
+  <joint name="mavi__horizontal_arm_joint_1" type="revolute">
+    <parent link="mavi__arm_part1"/>
+    <child link="mavi__arm_part2"/>
+    <origin rpy="0  0  0" xyz="0.065  0     0"/>
+    <axis xyz="0  0  1"/>
+    <limit effort="-1.0" lower="-1.57" upper="1.57" velocity="-1.0"/>
+  </joint>
+  <joint name="mavi__horizontal_arm_joint_2" type="revolute">
+    <parent link="mavi__arm_part2"/>
+    <child link="mavi__arm_part3"/>
+    <origin rpy="0  0  0" xyz="0.16  0    0"/>
+    <axis xyz="0  0  1"/>
+    <limit effort="-1.0" lower="-2.0" upper="2.0" velocity="-1.0"/>
+  </joint>
+  <joint name="mavi__horizontal_arm_joint_3" type="revolute">
+    <parent link="mavi__arm_part3"/>
+    <child link="mavi__arm_part4"/>
+    <origin rpy="0  0  0" xyz="0.161  0     0"/>
+    <axis xyz="0  0  1"/>
+    <limit effort="-1.0" lower="-2.0" upper="2.0" velocity="-1.0"/>
+  </joint>
+
+  <joint name="mavi__arm_vertical_joint" type="revolute">
+    <parent link="mavi__arm_part4"/>
+    <child link="mavi__arm_part5"/>
+    <origin rpy="0  0  0" xyz="0.114  0     0"/>
+    <axis xyz="0  1  0"/>
+    <limit effort="-1.0" lower="-1.57" upper="1.57" velocity="-1.0"/>
+  </joint>
+
+ <joint name="mavi__fixed_2" type="fixed">
+    <parent link="mavi__arm_part5"/>
+    <child link="mavi__arm_cuff"/>
+    <origin rpy="0  0  0" xyz="0.22454  0       0.11666"/>
+    <axis xyz="0  0  0"/>
+    <limit effort="0" lower="0" upper="0" velocity="0"/>
+  </joint>
+
+  <joint name="mavi__arm_rotator_joint" type="revolute">
+    <parent link="mavi__arm_cuff"/>
+    <child link="mavi__arm_rotator"/>
+    <origin rpy="0  0  0" xyz="0.27954  0       0.11666"/>
+    <axis xyz="1  0  0"/>
+    <limit effort="-1.0" lower="-1.57" upper="1.57" velocity="-1.0"/>
+  </joint>
+
+  <joint name="mavi__left_finger_joint" type="prismatic">
+    <parent link="mavi__arm_rotator"/>
+    <child link="mavi__left_finger"/>
+    <origin rpy="0  0  0" xyz="0.08  0.05  0"/>
+    <axis xyz="0 -1  0"/>
+    <limit effort="-1.0" lower="0.0" upper="0.03" velocity="-1.0"/>
+  </joint>
+  <joint name="mavi__right_finger_joint" type="prismatic">
+    <parent link="mavi__arm_rotator"/>
+    <child link="mavi__right_finger"/>
+    <origin rpy="0  0  0" xyz="0.08 -0.05  0"/>
+    <axis xyz="0  1  0"/>
+    <limit effort="-1.0" lower="0.0" upper="0.03" velocity="-1.0"/>
+  </joint>
+
+
+
+  <link name="mavi__arm_base">
+    <inertial>
+      <mass value="1"/>
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <inertia ixx="0.166667" ixy="0" ixz="0" iyy="0.166667" iyz="0" izz="0.166667"/>
+    </inertial>
+    <collision name="mavi__collision">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <box size="0.13 0.08 0.064"/>
+      </geometry>
+    </collision>
+    <visual name="mavi__visual">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <box size="0.13 0.08 0.065"/>
+      </geometry>
+    </visual>
+  </link>
+
+
+
+  <link name="mavi__arm_cuff">
+    <inertial>
+      <mass value="1"/>
+      <origin rpy="1.56  0    1.57" xyz="0  0       0"/>
+      <inertia ixx="0.145833" ixy="0" ixz="0" iyy="0.145833" iyz="0" izz="0.125"/>
+    </inertial>
+    <collision name="mavi__collision">
+      <origin rpy="1.57  0    1.57" xyz="0  0       0"/>
+      <geometry>
+        <cylinder length="0.07" radius="0.055"/>
+      </geometry>
+    </collision>
+    <visual name="mavi__visual">
+      <origin rpy="1.57  0    1.57" xyz="0  0       0"/>
+      <geometry>
+        <cylinder length="0.07" radius="0.055"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="mavi__arm_part1">
+    <inertial>
+      <mass value="1"/>
+      <origin rpy="0  0  0" xyz="0  0   0"/>
+      <inertia ixx="0.166667" ixy="0" ixz="0" iyy="0.166667" iyz="0" izz="0.166667"/>
+    </inertial>
+    <collision name="mavi__collision">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <box size="0.13 0.051 0.064"/>
+      </geometry>
+    </collision>
+    <visual name="mavi__visual">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <box size="0.13 0.051 0.064"/>
+      </geometry>
+    </visual>
+  </link>
+
+
+  <link name="mavi__arm_part2">
+    <inertial>
+      <mass value="1"/>
+      <origin rpy="0  0  0" xyz="0.08  0    0"/>
+      <inertia ixx="0.166667" ixy="0" ixz="0" iyy="0.166667" iyz="0" izz="0.166667"/>
+    </inertial>
+    <collision name="mavi__collision">
+      <origin rpy="0  0  0" xyz="0.08  0    0"/>
+      <geometry>
+        <box size="0.16 0.051 0.064"/>
+      </geometry>
+    </collision>
+    <visual name="mavi__visual">
+      <origin rpy="0  0  0" xyz="0.08  0    0"/>
+      <geometry>
+        <box size="0.16 0.051 0.064"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="mavi__arm_part3">
+    <inertial>
+      <mass value="1"/>
+      <origin rpy="0  0  0" xyz="0.08  0    0"/>
+      <inertia ixx="0.166667" ixy="0" ixz="0" iyy="0.166667" iyz="0" izz="0.166667"/>
+    </inertial>
+    <collision name="mavi__collision">
+      <origin rpy="0  0  0" xyz="0.08  0    0"/>
+      <geometry>
+        <box size="0.16 0.051 0.064"/>
+      </geometry>
+    </collision>
+    <visual name="mavi__visual">
+      <origin rpy="0  0  0" xyz="0.08  0    0"/>
+      <geometry>
+        <box size="0.16 0.051 0.064"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="mavi__arm_part4">
+    <inertial>
+      <mass value="1"/>
+      <origin rpy="0  0  0" xyz="0.057  0     0"/>
+      <inertia ixx="0.166667" ixy="0" ixz="0" iyy="0.166667" iyz="0" izz="0.166667"/>
+    </inertial>
+    <collision name="mavi__collision">
+      <origin rpy="0  0  0" xyz="0.057  0     0"/>
+      <geometry>
+        <box size="0.114 0.051 0.064"/>
+      </geometry>
+    </collision>
+    <visual name="mavi__visual">
+      <origin rpy="0  0  0" xyz="0.057  0     0"/>
+      <geometry>
+        <box size="0.114 0.051 0.064"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="mavi__arm_part5">
+    <inertial>
+      <mass value="1"/>
+      <origin rpy="0  0  0" xyz="0.053  0  0"/>
+      <inertia ixx="0.166667" ixy="0" ixz="0" iyy="0.166667" iyz="0" izz="0.166667"/>
+    </inertial>
+    <collision name="mavi__collision">
+      <origin rpy="0  0  0" xyz="0.053  0  0"/>
+      <geometry>
+        <box size="0.106 0.051 0.064"/>
+      </geometry>
+    </collision>
+    <visual name="mavi__visual">
+      <origin rpy="0  0  0" xyz="0.053  0  0"/>
+      <geometry>
+        <box size="0.106 0.051 0.064"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="mavi__arm_rotator">
+    <inertial>
+      <mass value="1"/>
+      <origin rpy="0  0  0" xyz="0.04  0    0"/>
+      <inertia ixx="0.166667" ixy="0" ixz="0" iyy="0.166667" iyz="0" izz="0.166667"/>
+    </inertial>
+    <collision name="mavi__collision">
+      <origin rpy="0  0  0" xyz="0.04  0    0"/>
+      <geometry>
+        <box size="0.08 0.15 0.058"/>
+      </geometry>
+    </collision>
+    <visual name="mavi__visual">
+      <origin rpy="0  0  0" xyz="0.04  0    0"/>
+      <geometry>
+        <box size="0.08 0.15 0.058"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="mavi__base">
+    <inertial>
+      <mass value="1000"/>
+      <origin rpy="0  0  0" xyz="-0.396  0    -0.77"/>
+      <inertia ixx="0.166667" ixy="0" ixz="0" iyy="0.166667" iyz="0" izz="0.166667"/>
+    </inertial>
+    <collision name="mavi__collision">
+      <origin rpy="0  0  0" xyz="-0.396  0    -0.77"/>
+      <geometry>
+        <box size="0.44 0.44 0.25"/>
+      </geometry>
+    </collision>
+    <visual name="mavi__visual">
+      <origin rpy="0  0  0" xyz="-0.396  0    -0.77"/>
+      <geometry>
+        <box size="0.44 0.44 0.25"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="mavi__left_finger">
+    <inertial>
+      <mass value="1"/>
+      <origin rpy="0  0  0" xyz="0.055  0     0"/>
+      <inertia ixx="0.166667" ixy="0" ixz="0" iyy="0.166667" iyz="0" izz="0.166667"/>
+    </inertial>
+    <collision name="mavi__collision">
+      <origin rpy="0  0  0" xyz="0.055  0     0"/>
+      <geometry>
+        <box size="0.11 0.04 0.058"/>
+      </geometry>
+    </collision>
+    <visual name="mavi__visual">
+      <origin rpy="0  0  0" xyz="0.055  0     0"/>
+      <geometry>
+        <box size="0.11 0.04 0.058"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="mavi__right_finger">
+    <inertial>
+      <mass value="1"/>
+      <origin rpy="0  0  0" xyz="0.055  0     0"/>
+      <inertia ixx="0.166667" ixy="0" ixz="0" iyy="0.166667" iyz="0" izz="0.166667"/>
+    </inertial>
+    <collision name="mavi__collision">
+      <origin rpy="0  0  0" xyz="0.055  0     0"/>
+      <geometry>
+        <box size="0.11 0.04 0.058"/>
+      </geometry>
+    </collision>
+    <visual name="mavi__visual">
+      <origin rpy="0  0  0" xyz="0.055  0     0"/>
+      <geometry>
+        <box size="0.11 0.04 0.058"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="mavi__stand">
+    <inertial>
+      <mass value="100"/>
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <inertia ixx="0.166667" ixy="0" ixz="0" iyy="0.166667" iyz="0" izz="0.166667"/>
+    </inertial>
+    <collision name="mavi__collision">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <box size="0.11 0.06 0.8"/>
+      </geometry>
+    </collision>
+    <visual name="mavi__visual">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <box size="0.11 0.06 0.8"/>
+      </geometry>
+    </visual>
+  </link>
+</robot>
